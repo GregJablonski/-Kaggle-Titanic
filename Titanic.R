@@ -26,3 +26,7 @@ full$Family[full$Family == 0] <- "Single"
 full$Family[full$Family == 1] <- "Pair"
 
 full$Deck <- sapply(full$Cabin, function(x) strsplit(x, NULL)[[1]][1])
+
+full$Age[is.na(full$Age)] <- mean(full$Age, na.rm = 'TRUE') 
+full$Embarked[is.na(full$Embarked)] <- "C"
+full$Fare[is.na(full$Fare)] <- median(full$Fare[full$Pclass == '3' & full$Embarked == 'S'], na.rm = TRUE)
